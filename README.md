@@ -3,7 +3,7 @@ Convert SQL Schema Dumps to Exportable Sequelize Models.
 
 # Usage
 
-### Directory Structure
+### Required Directory Structure
 ```sh
 root
     |- dumps
@@ -62,49 +62,49 @@ CREATE TABLE `users` (
 ```
 // models/users.js
 
-const Sequelize = require('sequelize');
-const sequelize = require('./db');
-const Users = sequelize.define(users, {
-    id: {
-      type: Sequelize.INTEGER(10),
-      allowNull: false,
-      autoIncrement: true,
-      primaryKey: true,
-    },
-    first_name: {
-      type: Sequelize.STRING(55),
-      defaultValue: NULL,
-    },
-    mid_name: {
-      type: Sequelize.STRING(155),
-      defaultValue: NULL,
-    },
-    last_name: {
-      type: Sequelize.STRING(55),
-      defaultValue: NULL,
-    },
-    email: {
-      type: Sequelize.STRING(255),
-      defaultValue: NULL,
-    },
-    mobile: {
-      type: Sequelize.STRING(25),
-      defaultValue: NULL,
-    },
-    password: {
-      type: Sequelize.STRING(255),
-      defaultValue: NULL,
-    },
-    created_at: {
-      type: timestamp,
-      defaultValue: NULL,
-    },
-    updated_at: {
-      type: timestamp,
-      defaultValue: NULL,
-    },
-});
-module.exports = Users;
+module.exports = (sequelize, DataTypes) => {
+  const Users = sequelize.define(users, {
+      id: {
+        type: DataTypes.INTEGER(10),
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+      },
+      first_name: {
+        type: DataTypes.STRING(55),
+        defaultValue: NULL,
+      },
+      mid_name: {
+        type: DataTypes.STRING(155),
+        defaultValue: NULL,
+      },
+      last_name: {
+        type: DataTypes.STRING(55),
+        defaultValue: NULL,
+      },
+      email: {
+        type: DataTypes.STRING(255),
+        defaultValue: NULL,
+      },
+      mobile: {
+        type: DataTypes.STRING(25),
+        defaultValue: NULL,
+      },
+      password: {
+        type: DataTypes.STRING(255),
+        defaultValue: NULL,
+      },
+      created_at: {
+        type: timestamp,
+        defaultValue: NULL,
+      },
+      updated_at: {
+        type: timestamp,
+        defaultValue: NULL,
+      },
+  });
+  return Users;
+}
 ```
 
 ### Dependencies
