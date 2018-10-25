@@ -115,7 +115,6 @@ class SchemaParser {
   
     let fileContent = 
 `module.exports = (sequelize, DataTypes) => {
-
   const ${modelName} = sequelize.define('${tableName}', {`;
   
     formattedEntries.forEach(entry => {
@@ -154,7 +153,8 @@ class SchemaParser {
     fileContent += `
   });
   return ${modelName};
-}`;
+};
+`;
   
     return fileContent;
   }
@@ -179,17 +179,26 @@ class SchemaParser {
     if(dataType.startsWith('tinyint')) {
       dataType = dataType.replace('tinyint', 'DataTypes.TINYINT');
     }
+    if(dataType.startsWith('smallint')) {
+      dataType = dataType.replace('smallint', 'DataTypes.SMALLINT');
+    }
     if(dataType.startsWith('varchar')) {
       dataType = dataType.replace('varchar', 'DataTypes.STRING');
     }
     if(dataType.startsWith('text')) {
       dataType = dataType.replace('text,', 'DataTypes.TEXT');
     }
+    if(dataType.startsWith('char')) {
+      dataType = dataType.replace('char,', 'DataTypes.CHAR');
+    }
     if(dataType.startsWith('datetime')) {
       dataType = dataType.replace('datetime', 'DataTypes.TIME');
     }
     if(dataType.startsWith('decimal')) {
       dataType = dataType.replace('decimal', 'DataTypes.DECIMAL');
+    }
+    if(dataType.startsWith('timestamp')) {
+      dataType = dataType.replace('timestamp', 'DataTypes.TIME');
     }
     if(dataType.startsWith('enum')) {
       values = '[' + dataType.substring(5, dataType.length - 1) + ']';
